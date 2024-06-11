@@ -45,7 +45,7 @@
 
 find_path ( QT5QSCINTILLA_INCLUDE_DIR
   NAMES qsciscintilla.h
-  HINTS ${Qt5Widgets_INCLUDE_DIRS}
+  HINTS ${Qt5Widgets_INCLUDE_DIRS} ${OPENSCAD_DEPS}/include
   PATH_SUFFIXES qt5 Qsci
 )
 
@@ -81,7 +81,7 @@ endif ()
 
 find_library ( QT5QSCINTILLA_LIBRARY
   NAMES qt5scintilla2 qscintilla2-qt5 qscintilla2 qscintilla2_qt5
-  HINTS ${Qt5Widgets_LIBRARIES}
+  HINTS ${Qt5Widgets_LIBRARIES} ${OPENSCAD_DEPS}/lib
 )
 
 set ( QT5QSCINTILLA_LIBRARIES ${QT5QSCINTILLA_LIBRARY} )

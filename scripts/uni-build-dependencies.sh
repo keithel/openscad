@@ -157,10 +157,10 @@ build_qt5scintilla2()
   cd $BASEDIR/src
   rm -rf ./QScintilla-gpl-$version.tar.gz
   if [ ! -f QScintilla-gpl-$version.tar.gz ]; then
-     curl -L -o "QScintilla-gpl-$version.tar.gz" "http://downloads.sourceforge.net/project/pyqt/QScintilla2/QScintilla-$version/QScintilla-gpl-$version.tar.gz?use_mirror=switch"
+     curl -L -o "QScintilla-gpl-$version.tar.gz" "https://sourceforge.net/projects/pyqt/files/QScintilla2/QScintilla-$version/QScintilla_gpl-$version.tar.gz/download#"
   fi
   tar xzf QScintilla-gpl-$version.tar.gz
-  cd QScintilla-gpl-$version/Qt4Qt5/
+  cd QScintilla_gpl-$version/Qt4Qt5/
   qmake CONFIG+=staticlib
   tmpinstalldir=$DEPLOYDIR/tmp/qsci$version
   INSTALL_ROOT=$tmpinstalldir make -j"$NUMCPU" install
@@ -174,9 +174,11 @@ build_qt5scintilla2()
   if [ ! -e $DEPLOYDIR/include/Qsci ]; then
     # workaround numerous bugs in qscintilla build system, see 
     # ../qscintilla2.prf and ../scintilla.pri for more info
-    qsci_staticlib=`find $tmpinstalldir -name libqscintilla2.a`
+    qsci_staticlib=`find $tmpinstalldir -name libqscintilla2_qt5.a`
     qsci_include=`find $tmpinstalldir -name Qsci`
     if [ -e $qsci_staticlib ]; then
+      mkdir -p $DEPLOYDIR/include
+      mkdir -p $DEPLOYDIR/lib
       cp -av $qsci_include $DEPLOYDIR/include/
       cp -av $qsci_staticlib $DEPLOYDIR/lib/
     else
